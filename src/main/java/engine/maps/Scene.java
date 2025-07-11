@@ -1,9 +1,6 @@
 package engine.maps;
 
 import java.util.List;
-import java.util.Map;
-
-import com.raylib.Raylib.Texture;
 
 import engine.entity.Entity;
 import lombok.Getter;
@@ -24,23 +21,28 @@ abstract public class Scene {
     @Getter @Setter
     boolean isActive;
     
-    public Scene(String sceneId, MapLayer sceneMap, List<Entity> entityList, MapMeta mapMeta,
-            String mapMetaPath, boolean isActive) {
+    public Scene(String sceneId, String mapMetaPath) {
         this.sceneId = sceneId;
-        this.sceneMap = sceneMap;
-        this.entityList = entityList;
-        this.mapMeta = mapMeta;
         this.mapMetaPath = mapMetaPath;
-        this.isActive = isActive;
+        mapMeta = getMeta();
+        if(mapMeta == null){
+            new Exception(sceneId + " dont have correct mapMetaPath, it have " + mapMetaPath);
+        }
     }
 
-    public abstract void load();
-    public abstract void unload();
-    public abstract List<Entity> getEntities();
-    public abstract void getZSortedLayers();
-    public abstract List<String> getEntryPoint();
-    public abstract String getNavMap();
-    public abstract String getPOIs();
+
+
+    private MapMeta getMeta(){
+        return new MapMeta(sceneId, mapMetaPath);
+    }
+
+    public void load(){};
+    public void unload(){};
+    public List<Entity> getEntities(){return null;};
+    public void getZSortedLayers(){};
+    public List<String> getEntryPoint(){return null;};
+    public String getNavMap(){return null;};
+    public String getPOIs(){return null;};
     
 
 }

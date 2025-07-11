@@ -1,0 +1,8 @@
+{
+    "sceneId":"test_scene",
+    "navmesh":"/assets/scene/test/nav.png",
+    "layers": {
+    "250": "alchemy.png"
+  }
+
+}

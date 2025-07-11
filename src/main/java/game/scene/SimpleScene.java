@@ -1,59 +1,33 @@
     package game.scene;
 
-    import java.util.HashMap;
-    import java.util.List;
+    import static com.raylib.Colors.WHITE;
+import static com.raylib.Raylib.DrawTexture;
+import static com.raylib.Raylib.LoadTexture;
+
     import java.util.Map;
 
-    import engine.entity.Entity;
-    import engine.maps.MapLayer;
-    import engine.maps.Scene;;
+import com.raylib.Raylib.Texture;
+
+import engine.maps.MapLayer;
+import engine.maps.Scene;
+import lombok.Getter;;
 
     public class SimpleScene extends Scene {
 
+        @Getter
+        private MapLayer layers;
+
         public SimpleScene() {
-            super("test_scene", getMapLayers(),  getEntity(), null, null, true);
+            super("test_scene", "assets/scene/test/test.json");
+            
         }
 
-        private static MapLayer getMapLayers(){
-                Map<Integer, String> mapLay = new HashMap<>();
-                mapLay.put(250, "algae.png");
-                return new MapLayer(0, "test", mapLay);
-        }
 
-        private static  List<Entity> getEntity(){
-            return null;
-        }
-
-        @Override
-        public void load(){
-            return;
-        }
-        @Override
-        public void unload() {
-            return;
-        }
-
-        @Override
-        public List<Entity> getEntities(){
-            return null;
-        }
-
-        @Override
-        public void getZSortedLayers(){
-            return;
-        }
-
-        @Override
-        public List<String> getEntryPoint(){
-            return null;
-        }
-        @Override
-        public String getNavMap(){
-            return null;
-        }
-
-        @Override
-        public String getPOIs(){
-            return null;
+        public void render(){
+            for (Map.Entry<Integer, String> l: layers.getLayers().entrySet()) {
+                
+            Texture t = LoadTexture("assets/scene/test/" + l.getValue());
+            DrawTexture(t, 0, 0, WHITE);
+            }
         }
     }
