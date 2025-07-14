@@ -3,11 +3,13 @@ import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
 
 import engine.enums.Paths;
+import engine.meta.AudioMeta;
 import engine.meta.SceneMeta;
 public class Main {
 
   public static boolean isDebug = true;
   static SceneMeta sm = new SceneMeta(Paths.SCENE.getRelativePath("test.json"));
+  static AudioMeta am = new AudioMeta(Paths.AUDIO.getRelativePath("test.json"));
   public static void main(String[] args){
      
     InitWindow(800,450,"Jaylib VSCode Demo");
@@ -18,7 +20,7 @@ public class Main {
      */
     System.out.println("Working dir: " + System.getProperty("user.dir"));
     System.out.println(sm.toString());
-    
+    System.out.println(am.toString());
     
     while (!WindowShouldClose()) {
       BeginDrawing();
