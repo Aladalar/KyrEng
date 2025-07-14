@@ -1,0 +1,18 @@
+{
+  "id": "village_square",
+  
+  "layers": [
+    { "name":"bg", "z": 10, "file": "fog.png" },
+    { "name":"ent", "z": 20, "file": "bg.png" },
+    { "name":"fg", "z": 99, "file": "fg.png" }
+  ],
+
+  "transitions": [
+    { "target": "tavern", "posX": 800, "posY": 200, "width": 50, "height": 50 }
+  ],
+
+
+  "triggers": [
+    { "target": "tavern", "posX": 800, "posY": 200, "width": 50, "height": 50 }
+  ]
+}
