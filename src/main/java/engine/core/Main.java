@@ -12,22 +12,29 @@ public class Main {
   static AudioMeta am = new AudioMeta(Paths.AUDIO.getRelativePath("test.json"));
   public static void main(String[] args){
      
-    InitWindow(800,450,"Jaylib VSCode Demo");
+    InitWindow(1280,720,"Jaylib VSCode Demo");
     SetTargetFPS(60);
 
     /*
      * Load once test
      */
-    System.out.println("Working dir: " + System.getProperty("user.dir"));
-    System.out.println(sm.toString());
-    System.out.println(am.toString());
+    //System.out.println("Working dir: " + System.getProperty("user.dir"));
+    //System.out.println(sm.toString());
+    //System.out.println(am.toString());
+    System.out.println("lastX: " + (int)(1.0f * GetScreenWidth()));
+    System.out.println("lastY: " + (int)(1.0f * GetScreenHeight()));
     
     while (!WindowShouldClose()) {
       BeginDrawing();
-        ClearBackground(DARKGRAY);
+        ClearBackground(WHITE);
+        if(IsKeyPressed(KEY_F1)){
+          ToggleFullscreen();
+        }
         /*
          *  Update Test
          */
+        DebugUtils.DrawGrid(GetScreenWidth(), GetScreenHeight(), 0.03f);
+        DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight());
         DrawText("FPS: " + GetFPS(), 10, 10, 20, DARKGREEN);
       EndDrawing();
     }

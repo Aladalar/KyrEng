@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import engine.meta.objects.MetaEntity;
 import engine.meta.objects.MetaEvent;
 import engine.meta.objects.MetaLayer;
 
@@ -17,16 +18,18 @@ public class SceneMeta {
     List<MetaLayer> layers;
     List<MetaEvent> transitions;
     List<MetaEvent> triggers;
+    List<MetaEntity> entities;
     
     public SceneMeta(String path) {
         _construct(path);
     }
 
-    public SceneMeta(String id, List<MetaLayer> layers, List<MetaEvent> transitions, List<MetaEvent> triggers) {
+    public SceneMeta(String id, List<MetaLayer> layers, List<MetaEvent> transitions, List<MetaEvent> triggers, List<MetaEntity> entities) {
         this.id = id;
         this.layers = layers;
         this.transitions = transitions;
         this.triggers = triggers;
+        this.entities = entities;
     }
     
     private void _construct(String path){
@@ -36,6 +39,7 @@ public class SceneMeta {
             this.layers = gson.layers;
             this.transitions = gson. transitions;
             this.triggers = gson.triggers;
+            this.entities = gson.entities;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -46,9 +50,10 @@ public class SceneMeta {
 
     @Override
     public String toString() {
-        return "SceneMeta [id=" + id + ", layers=" + layers + ", transitions=" + transitions + ", triggers=" + triggers
-                + "]";
+        return "SceneMeta [path=" + path + ", id=" + id + ", layers=" + layers + ", transitions=" + transitions
+                + ", triggers=" + triggers + ", entities=" + entities + "]";
     }
 
+    
     
 }

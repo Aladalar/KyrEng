@@ -14,5 +14,20 @@
 
   "triggers": [
     { "target": "tavern", "posX": 800, "posY": 200, "width": 50, "height": 50 }
-  ]
+  ],
+
+  "entities": [
+    {
+        "id": "old_man",
+        "type": "npc", 
+        "x": 240, 
+        "y": 180
+    },
+    {
+        "id": "potion_red",
+        "type": "item",
+        "x": 400,
+        "y": 200
+    }
+]
 }
