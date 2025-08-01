@@ -7,6 +7,8 @@ import static com.raylib.Raylib.DrawCircle;
 import static com.raylib.Raylib.DrawLine;
 import static com.raylib.Raylib.DrawText;
 
+import engine.components.screen.ScreenRegion;
+
 public class DebugUtils {
 
     /**
@@ -49,5 +51,34 @@ public class DebugUtils {
         String label = String.format("(%.2f, %.2f)", percentX, percentY);
         DrawText(label, (int)(screenWidth*0.8), (int)screenHeight-50, 40, RED);
     }
+
+    public static void DrawGridInRegion(ScreenRegion region, float gridSize) {
+        int x0 = region.getPxx();
+        int y0 = region.getPxy();
+        int w  = region.getPxw();
+        int h  = region.getPxh();
+
+        int stepX = (int)(gridSize * w);
+        int stepY = (int)(gridSize * h);
+
+        int centerX = x0 + w / 2;
+        int centerY = y0 + h / 2;
+
+        for (int x = centerX + stepX; x < x0 + w; x += stepX)
+            DrawLine(x, y0, x, y0 + h, BLACK);
+        for (int x = centerX - stepX; x > x0; x -= stepX)
+            DrawLine(x, y0, x, y0 + h, BLACK);
+
+        for (int y = centerY + stepY; y < y0 + h; y += stepY)
+            DrawLine(x0, y, x0 + w, y, BLACK);
+        for (int y = centerY - stepY; y > y0; y -= stepY)
+            DrawLine(x0, y, x0 + w, y, BLACK);
+
+        DrawCircle(centerX, centerY, 5f, RED);
+        DrawLine(centerX, y0, centerX, y0 + h, RED);
+        DrawLine(x0, centerY, x0 + w, centerY, RED);
+    }
+
+    
     
 }
