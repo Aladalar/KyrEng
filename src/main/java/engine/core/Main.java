@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.raylib.Raylib.Vector2;
-
 import engine.components.screen.ScreenRegion;
 import engine.enums.Paths;
 import engine.meta.AudioMeta;
@@ -50,15 +48,13 @@ public class Main {
         medailon.draw();
         inventory.draw();
 
-        int mx = GetMouseX();
-        int my = GetMouseY();
-
         for (ScreenRegion region : regions) {
-            if (region.contains(mx, my)) {
-                DebugUtils.DrawCoord(mx, my, GetScreenWidth(), GetScreenHeight(), region);
+            if (region.contains(GetMouseX(), GetMouseY())) {
+                DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight(), region);
+            }else {
+              DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight(), null);
             } 
         }
-        DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight(), null);
         
         DrawText("FPS: " + GetFPS(), 10, 10, 20, DARKGREEN);
       EndDrawing();

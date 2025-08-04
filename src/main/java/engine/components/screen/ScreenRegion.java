@@ -44,8 +44,8 @@ public class ScreenRegion {
     }
 
     public float[] toLocal(float mx, float my) {
-        int localX = (int) ((mx - pxx) / (float) pxw);
-        int localY = (int) ((my - pxy) / (float) pxh);
+        float localX = (mx - pxx) / (float) pxw;
+        float localY = (my - pxy) / (float) pxh;
         return new float[] {localX,localY};
     }
 

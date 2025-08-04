@@ -2,15 +2,12 @@ package engine.core;
 
 
 import static com.raylib.Colors.BLACK;
-import static com.raylib.Colors.BROWN;
 import static com.raylib.Colors.PINK;
 import static com.raylib.Colors.RED;
 import static com.raylib.Raylib.DrawCircle;
 import static com.raylib.Raylib.DrawLine;
 import static com.raylib.Raylib.DrawText;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 import engine.components.screen.ScreenRegion;
 
@@ -54,10 +51,10 @@ public class DebugUtils {
         float percentX = mouseX / (float) screenWidth;
         float percentY = mouseY / (float) screenHeight;
         if(region != null){
-            float[] local = region.toLocal(percentX, percentY);
-            String label = String.format("(%.2f, %.2f)", local[0], local[1]);
-            DrawText(label, (int)(screenWidth*0.03), (int)screenHeight-50, 40, BROWN);
-            System.out.println(Arrays.toString(local));
+            float localX = (mouseX - region.getPxx()) / (float) region.getPxw();
+            float localY = (mouseY - region.getPxy()) / (float) region.getPxh();
+            String label = String.format("(%.2f, %.2f)", localX, localY);
+            DrawText(label, (int)(screenWidth*0.03), (int)screenHeight-50, 40, BLACK);
         } else{
             String label = String.format("(%.2f, %.2f)", percentX, percentY);
             DrawText(label, (int)(screenWidth*0.8), (int)screenHeight-50, 40, RED);
