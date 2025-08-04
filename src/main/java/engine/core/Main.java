@@ -2,6 +2,12 @@ package engine.core;
 import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.raylib.Raylib.Vector2;
+
 import engine.components.screen.ScreenRegion;
 import engine.enums.Paths;
 import engine.meta.AudioMeta;
@@ -26,6 +32,9 @@ public class Main {
     ScreenRegion menu = new ScreenRegion("menu", 0.02f, 0.72f, .23f, .26f, BEIGE, GetScreenHeight(), GetScreenWidth());
     ScreenRegion medailon = new ScreenRegion("medialon", .75f, .72f, .23f, .26f, GREEN, GetScreenHeight(), GetScreenWidth());
     ScreenRegion inventory = new ScreenRegion("inventory", .27f, .72f, .46f, .26f, YELLOW, GetScreenHeight(), GetScreenWidth());
+    List<ScreenRegion> regions = new ArrayList<>();
+    regions.addAll(Arrays.asList(game, menu, medailon, inventory));
+
     while (!WindowShouldClose()) {
       BeginDrawing();
         ClearBackground(WHITE);
@@ -40,7 +49,16 @@ public class Main {
         menu.draw();
         medailon.draw();
         inventory.draw();
-        DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight());
+
+        int mx = GetMouseX();
+        int my = GetMouseY();
+
+        for (ScreenRegion region : regions) {
+            if (region.contains(mx, my)) {
+                DebugUtils.DrawCoord(mx, my, GetScreenWidth(), GetScreenHeight(), region);
+            } 
+        }
+        DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight(), null);
         
         DrawText("FPS: " + GetFPS(), 10, 10, 20, DARKGREEN);
       EndDrawing();

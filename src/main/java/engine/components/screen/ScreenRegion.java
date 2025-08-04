@@ -2,7 +2,6 @@ package engine.components.screen;
 
 import com.raylib.Raylib;
 import com.raylib.Raylib.Color;
-
 import engine.core.DebugUtils;
 import engine.core.Main;
 import lombok.Data;
@@ -39,4 +38,15 @@ public class ScreenRegion {
         pxh = (int)(height * screenHeight);
     }
     
+    public boolean contains(int mouseX, int mouseY) {
+    return (mouseX >= pxx && mouseX <= pxx + pxw &&
+            mouseY >= pxy && mouseY <= pxy + pxh);
+    }
+
+    public float[] toLocal(float mx, float my) {
+        int localX = (int) ((mx - pxx) / (float) pxw);
+        int localY = (int) ((my - pxy) / (float) pxh);
+        return new float[] {localX,localY};
+    }
+
 }

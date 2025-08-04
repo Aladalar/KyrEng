@@ -2,10 +2,15 @@ package engine.core;
 
 
 import static com.raylib.Colors.BLACK;
+import static com.raylib.Colors.BROWN;
+import static com.raylib.Colors.PINK;
 import static com.raylib.Colors.RED;
 import static com.raylib.Raylib.DrawCircle;
 import static com.raylib.Raylib.DrawLine;
 import static com.raylib.Raylib.DrawText;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import engine.components.screen.ScreenRegion;
 
@@ -45,11 +50,18 @@ public class DebugUtils {
         DrawLine(0, (int) (centerY*1.5), screenWidth, (int)(centerY*1.5), RED);
     }
 
-    public static void DrawCoord(int mouseX, int mouseY, int screenWidth, int screenHeight){
+    public static void DrawCoord(int mouseX, int mouseY, int screenWidth, int screenHeight, ScreenRegion region){
         float percentX = mouseX / (float) screenWidth;
         float percentY = mouseY / (float) screenHeight;
-        String label = String.format("(%.2f, %.2f)", percentX, percentY);
-        DrawText(label, (int)(screenWidth*0.8), (int)screenHeight-50, 40, RED);
+        if(region != null){
+            float[] local = region.toLocal(percentX, percentY);
+            String label = String.format("(%.2f, %.2f)", local[0], local[1]);
+            DrawText(label, (int)(screenWidth*0.03), (int)screenHeight-50, 40, BROWN);
+            System.out.println(Arrays.toString(local));
+        } else{
+            String label = String.format("(%.2f, %.2f)", percentX, percentY);
+            DrawText(label, (int)(screenWidth*0.8), (int)screenHeight-50, 40, RED);
+        }
     }
 
     public static void DrawGridInRegion(ScreenRegion region, float gridSize) {
@@ -78,6 +90,23 @@ public class DebugUtils {
         DrawLine(centerX, y0, centerX, y0 + h, RED);
         DrawLine(x0, centerY, x0 + w, centerY, RED);
     }
+
+    public static void DrawCoordInRegion(int mouseX, int mouseY, ScreenRegion region) {
+    int x0 = region.getPxx();
+    int y0 = region.getPxy();
+    int w  = region.getPxw();
+    int h  = region.getPxh();
+
+    // kurzor je mimo daný blok → neřeš
+    if (mouseX < x0 || mouseX > x0 + w || mouseY < y0 || mouseY > y0 + h)
+        return;
+
+    float percentX = (mouseX - x0) / (float) w;
+    float percentY = (mouseY - y0) / (float) h;
+    String label = String.format("[%s] (%.2f, %.2f)", region.getId(), percentX, percentY);
+
+    DrawText(label, x0 + 5, y0 + h - 20, 18, PINK);
+}
 
     
     
