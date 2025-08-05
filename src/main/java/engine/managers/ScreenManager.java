@@ -1,19 +1,50 @@
 package engine.managers;
 
+import static com.raylib.Colors.BEIGE;
+import static com.raylib.Colors.BLUE;
+import static com.raylib.Colors.GREEN;
+import static com.raylib.Colors.YELLOW;
+import static com.raylib.Raylib.GetScreenHeight;
+import static com.raylib.Raylib.GetScreenWidth;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import engine.components.SceneComponent;
+import engine.components.screen.ScreenRegion;
+import lombok.Getter;
 
 public class ScreenManager {
 
-    List<SceneComponent> components;
+    @Getter
+    List<ScreenRegion> regions = new ArrayList<>();   
+
+    public ScreenManager() {
+        loadRegions();
+    }
+
+    public void loadRegions(){
+        regions.addAll(Arrays.asList(
+        new ScreenRegion("main", 0.02f, 0.02f, 0.96f, 0.68f, BLUE, GetScreenHeight(), GetScreenWidth()),
+        new ScreenRegion("menu", 0.02f, 0.72f, .23f, .26f, BEIGE, GetScreenHeight(), GetScreenWidth()),
+        new ScreenRegion("medialon", .75f, .72f, .23f, .26f, GREEN, GetScreenHeight(), GetScreenWidth()),
+        new ScreenRegion("inventory", .27f, .72f, .46f, .26f, YELLOW, GetScreenHeight(), GetScreenWidth())
+            )
+        );
+    }
+
+    public ScreenRegion getRegion(String id){
+        return regions.stream().filter(region -> region.getId().equals(id)).findFirst().orElse(null);
+    }
+
+
 
     public void UpdateComponents(){
 
     }
 
-    public void DrawComponent(){
-        
+    public void drawRegions(){
+        regions.forEach(region -> region.draw());
     }
     
 }

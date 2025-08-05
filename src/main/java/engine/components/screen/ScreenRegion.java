@@ -26,6 +26,7 @@ public class ScreenRegion {
 
     public void draw(){
         Raylib.DrawRectangle(pxx, pxy, pxw, pxh, color);
+        System.out.printf("%s: pxx=%d pxy=%d pxw=%d pxh=%d\n", id, pxx, pxy, pxw, pxh);
         if(Main.isDebug){
             DebugUtils.DrawGridInRegion(this, .05f);
         }
