@@ -2,10 +2,6 @@ package engine.core;
 import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import engine.components.screen.ScreenRegion;
 import engine.enums.Paths;
 import engine.managers.ScreenManager;
