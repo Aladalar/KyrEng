@@ -4,6 +4,7 @@ import com.raylib.Raylib;
 import com.raylib.Raylib.Color;
 import engine.core.DebugUtils;
 import engine.core.Main;
+import engine.components.scene.InventoryComponent;
 import engine.components.scene.SceneComponent;
 import lombok.Data;
 
@@ -34,8 +35,10 @@ public class ScreenRegion {
 
     public void draw(){
         Raylib.DrawRectangle(pxx, pxy, pxw, pxh, color);
+        System.out.println("Component: " + (component == null ? "null" : component.getId()));
         if (component != null && component.isActive()) {
             component.draw();
+            System.out.println("SCREEN DRAW");
         }
         if(Main.isDebug){
             DebugUtils.DrawGridInRegion(this, .05f);

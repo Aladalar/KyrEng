@@ -6,8 +6,9 @@ import lombok.Data;
 @Data
 abstract public class SceneComponent {
 
+    String id;
     boolean isActive = false;
-    ScreenRegion parent;    
+    ScreenRegion parentRegion;    
 
     public abstract void draw();
     public abstract void update();
@@ -18,6 +19,12 @@ abstract public class SceneComponent {
     }
 
     public void setParent(ScreenRegion region) {
-        this.parent = region;
+        this.parentRegion = region;
     }
+    @Override
+    public String toString() {
+        return "SceneComponent [id=" + id + ", isActive=" + isActive + "]";
+    }
+
+    
 }
