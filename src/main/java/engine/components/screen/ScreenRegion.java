@@ -23,11 +23,12 @@ public class ScreenRegion {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = color;
         recalculate(screenHeight, screenWidth);
+        this.color = color;
         if(component != null){
             this.component = component;
             component.setParent(this);
+            component.init();
         } else {
             this.component = null;
         }
@@ -35,10 +36,8 @@ public class ScreenRegion {
 
     public void draw(){
         Raylib.DrawRectangle(pxx, pxy, pxw, pxh, color);
-        System.out.println("Component: " + (component == null ? "null" : component.getId()));
         if (component != null && component.isActive()) {
             component.draw();
-            System.out.println("SCREEN DRAW");
         }
         if(Main.isDebug){
             DebugUtils.DrawGridInRegion(this, .05f);

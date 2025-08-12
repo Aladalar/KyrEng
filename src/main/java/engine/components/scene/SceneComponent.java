@@ -18,6 +18,8 @@ abstract public class SceneComponent {
         isActive = !isActive;
     }
 
+    abstract public void init(); 
+
     public void setParent(ScreenRegion region) {
         this.parentRegion = region;
     }

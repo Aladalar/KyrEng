@@ -51,7 +51,6 @@ public class ScreenManager {
     }
 
     public void drawRegions(){
-        //System.out.println("Test Screen manager");
         regions.forEach(region -> region.draw());
     }
     
