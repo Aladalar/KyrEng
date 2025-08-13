@@ -3,16 +3,12 @@ import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
 
 import engine.components.screen.ScreenRegion;
-import engine.enums.Paths;
 import engine.managers.ScreenManager;
-import engine.meta.AudioMeta;
-import engine.meta.SceneMeta;
+
 public class Main {
 
   public static boolean isDebug = true;
-  static SceneMeta sm = new SceneMeta(Paths.SCENE.getRelativePath("test.json"));
-  static AudioMeta am = new AudioMeta(Paths.AUDIO.getRelativePath("test.json"));
-  static ScreenManager scm;
+   static ScreenManager scm;
   public static void main(String[] args){
      
     InitWindow(1280,720,"Jaylib VSCode Demo");
@@ -31,18 +27,24 @@ public class Main {
         if(IsKeyPressed(KEY_F1)){
           ToggleFullscreen();
         }
+        if(IsKeyPressed(KEY_F2)){
+          isDebug = !isDebug;
+        }
         /*
          *  Update Test
          */
-        DebugUtils.DrawGrid(GetScreenWidth(), GetScreenHeight(), 0.01f);
+        
+        if(isDebug){
+          DebugUtils.DrawGrid(GetScreenWidth(), GetScreenHeight(), 0.01f);
+        }
         scm.drawRegions();
-
-
+        
         for (ScreenRegion region : scm.getRegions()) {
-            if (region.contains(GetMouseX(), GetMouseY())) {
+            if (region.contains(GetMouseX(), GetMouseY()) && isDebug) {
                 DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight(), region);
             }else {
-              DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight(), null);
+
+              if (isDebug) DebugUtils.DrawCoord(GetMouseX(), GetMouseY(), GetScreenWidth(), GetScreenHeight(), null);
             } 
         }
         

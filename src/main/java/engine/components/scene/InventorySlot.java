@@ -6,7 +6,6 @@ import static com.raylib.Colors.WHITE;
 import static com.raylib.Raylib.DrawCircle;
 import static com.raylib.Raylib.DrawRectangle;
 import static com.raylib.Raylib.DrawText;
-import static com.raylib.Raylib.MeasureText;
 
 import engine.components.screen.ScreenRegion;
 import engine.components.templates.SlotLayout;

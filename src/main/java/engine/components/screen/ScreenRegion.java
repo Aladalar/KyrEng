@@ -4,7 +4,6 @@ import com.raylib.Raylib;
 import com.raylib.Raylib.Color;
 import engine.core.DebugUtils;
 import engine.core.Main;
-import engine.components.scene.InventoryComponent;
 import engine.components.scene.SceneComponent;
 import lombok.Data;
 
