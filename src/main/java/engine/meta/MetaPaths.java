@@ -1,6 +1,5 @@
 package engine.meta;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
@@ -25,11 +24,6 @@ public class MetaPaths {
     }
 
     public java.io.Reader openReader(String pathString) throws FileNotFoundException{
-        try {
-            return new BufferedReader(
-                new InputStreamReader(new FileInputStream(Paths.get(pathString).toFile()), StandardCharsets.UTF_8));
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("Meta file not found: " + Paths.get(pathString).toAbsolutePath());
-        }
+        return new InputStreamReader(new FileInputStream(Paths.get(pathString).toFile()), StandardCharsets.UTF_8);
     }
 }
