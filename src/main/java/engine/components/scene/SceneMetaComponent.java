@@ -1,51 +1,44 @@
 package engine.components.scene;
 
+import java.util.Collections;
 import java.util.List;
 
-import com.google.gson.Gson;
-
-import engine.meta.MetaAudio;
 import engine.meta.MetaEntity;
-import engine.meta.MetaPaths;
 import engine.meta.MetaScene;
 import engine.meta.MetaTransition;
 import engine.meta.MetaVFX;
 import lombok.Data;
 
 @Data
-public class SceneMetaComponent {
+public abstract class SceneMetaComponent {
 
+    String id;
     MetaScene scene;
     List<MetaEntity> entities;
-    MetaAudio audio;
-    MetaVFX vfx;
+    List<MetaVFX> vfx;
     List<MetaTransition> transitions;    
 
-    public SceneMetaComponent(String name){
-        load(name);
-    }
-    
-    public SceneMetaComponent load(String sceneName){
+    public final void loadAll(){
+        this.id = (id != null && !id.isEmpty()) ? id : "Unnamed scene";
 
-        MetaPaths path = new MetaPaths();
-        Gson gson = new Gson();
-
-
-        return null;
-    }
-
-    private boolean validateScene(){
-
-        if(scene == null){
-            throw new IllegalStateException("Scene meta of "+ scene.toString() +" is not valid or have problems in its structure!");
+        this.scene = loadScene();
+        if (this.scene == null) {
+         throw new IllegalStateException("loadScene() returned null");
         }
-        if (scene.id == null && scene.id.trim().isEmpty()){
-            throw new IllegalStateException("Scene ID in "+scene.toString()+" has mission or incorrect");
-        }
-        if (scene.layers == null && scene.layers.isEmpty()){
-            throw new IllegalStateException("Scene layers in "+scene.toString()+" are  mission or incorrect");
-        }
-        return true; 
+
+        List<MetaEntity> ents = loadEntities();
+        this.entities = (ents != null) ? ents : Collections.emptyList();
+
+        List<MetaVFX> vfxList = loadVFX();
+        this.vfx = (vfxList != null) ? vfxList : Collections.emptyList();
+
+        List<MetaTransition> transList = loadTransitions();
+        this.transitions = (transList != null) ? transList : Collections.emptyList();
+
     }
 
+    public abstract MetaScene loadScene();
+    public abstract List<MetaEntity> loadEntities();
+    public abstract List<MetaVFX> loadVFX();
+    public abstract List<MetaTransition> loadTransitions();
 }
