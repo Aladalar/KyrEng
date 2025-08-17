@@ -5,7 +5,7 @@ bin/
 !gradle/wrapper/gradle-wrapper.jar
 
 # === VS Code ===
-.vscode/
+.vscode/*
 
 # === OS Specific ===
 .DS_Store

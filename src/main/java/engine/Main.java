@@ -1,4 +1,4 @@
-package engine.core;
+package engine;
 import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
 
@@ -7,7 +7,7 @@ public class Main {
   public static boolean isDebug = true;
   public static void main(String[] args){
      
-    InitWindow(800,450,"Jaylib VSCode Demo");
+    InitWindow(1024,640,"KyrEngine restoration");
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
