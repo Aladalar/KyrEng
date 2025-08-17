@@ -1,0 +1,11 @@
+{
+  "java.project.referencedLibraries": [
+    {
+      "path": "libs/jaylib-5.5.0.jar",
+      "sources": "libs/jaylib-5.5.0-sources.jar",
+      "javadoc": "libs/jaylib-5.5.0-javadoc.jar"
+    }
+  ],  
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.compile.automaticallyTriggerAnnotationProcessing": true
+}
