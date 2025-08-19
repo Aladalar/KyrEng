@@ -1,0 +1,49 @@
+plugins {
+    id 'java' id 'application' id 'org.beryx.jlink' version '3.1.3'
+} 
+group = 'cz.aladalar.kyreng' 
+version = '0.0.1-prototype' 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+} dependencies {
+    implementation 'uk.co.electronstudio.jaylib:jaylib:5.5.0-2'
+    /* choose one natives line per platform while developing:
+   runtimeOnly 'uk.co.electronstudio.jaylib:jaylib-natives-windows-x86_64:5.5.0-2' 
+   runtimeOnly 'uk.co.electronstudio.jaylib:jaylib-natives-macosx-x86_64:5.5.0-2'
+   compileOnly 'org.projectlombok:lombok:1.18.34'*/
+    runtimeOnly 'uk.co.electronstudio.jaylib:jaylib-natives-linux-x86_64:5.5.0-2'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+application {
+    mainClass = 'engine.Main'
+} tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+jlink {
+    /* Keep it small but compatible */
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'KyrEng' /* Raylib is JNI; usually no special flags needed. Keep empty unless you need them. */
+        jvmArgs = []
+    }
+    /* ---- jpackage config (varies by OS you run this on) ---- */
+    jpackage {
+        imageName = 'KyrEng' appVersion = project.version vendor = 'Aladalar'
+        /* On Windows you'll set: installerType = 'exe' 
+ On Linux use 'app-image' then wrap into .AppImage (see steps below). */
+        installerType = org.gradle.internal.os.OperatingSystem.current().isWindows() 
+            ? 'exe': 'app-image'
+        /* Optional: icons (provide real files) 
+ icon = file('packaging/icon.ico').absolutePath 
+ Windows 
+ icon = file('packaging/icon.png').absolutePath */
+    }
+}

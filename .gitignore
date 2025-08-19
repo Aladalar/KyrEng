@@ -1,0 +1,35 @@
+# === Gradle ===
+.gradle/
+build/
+bin/
+libs/
+!gradle/wrapper/gradle-wrapper.jar
+
+# === VS Code ===
+.vscode/*
+
+# === OS Specific ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+
+# === Java ===
+*.class
+*.jar
+*.war
+*.ear
+
+# === IntelliJ IDEA (if ever used) ===
+.idea/
+*.iml
+out/
+
+# === Others ===
+*.tmp
+
+.gradle/8.8/fileHashes/fileHashes.bin
+.gradle/8.8/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/cache.properties
