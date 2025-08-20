@@ -32,7 +32,7 @@ public class Screen {
 
     public void addBackground(){
         back.addAll(Arrays.asList(
-            new ScreenLayer("test", getRegion("main"), 0, "test")
+            new ScreenLayer("test", getRegion("main"), 0, "/assets/test/Skeleton/sprites/Skeleton Walk.png")
         ));
     }
 
@@ -44,7 +44,7 @@ public class Screen {
 
     public void renderBackground(){
         for(ScreenLayer l : back){
-            
+
         }
     }
 

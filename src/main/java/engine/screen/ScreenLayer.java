@@ -1,7 +1,6 @@
 package engine.screen;
 
-import static com.raylib.Colors.GREEN;
-import static com.raylib.Colors.RED;
+import static com.raylib.Raylib.LoadTexture;
 
 import com.raylib.Raylib.Texture;
 
@@ -20,7 +19,7 @@ public class ScreenLayer {
         this.id = id;
         this.region = region;
         this.z = z;
-        loadTexture();
+        loadTexture(path);
     }
 
     public ScreenLayer(String id, ScreenRegion region, int z, Texture render) {
@@ -30,8 +29,8 @@ public class ScreenLayer {
         this.render = render;
     }
 
-    public Texture loadTexture(){
-        return new Texture(GREEN);
+    public Texture loadTexture(String path){
+        return LoadTexture(path);
     }
     
 }
