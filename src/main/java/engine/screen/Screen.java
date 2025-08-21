@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.raylib.Raylib.Color;
+
 import lombok.Data;
 
 @Data
@@ -22,11 +24,12 @@ public class Screen {
     }
 
     public void addRegions(){
+        Color debugCol = new Color().r((byte) 255).a((byte) 64);
         regions.addAll(Arrays.asList(
-            new ScreenRegion("main", 0.02f, 0.02f, 0.96f, 0.68f, RED),
-            new ScreenRegion("menu", 0.02f, 0.72f, 0.23f, 0.26f, RED),
-            new ScreenRegion("amulet", 0.75f, 0.72f, 0.23f, 0.26f, RED),
-            new ScreenRegion("inv", 0.27f, 0.72f, 0.46f, 0.26f, RED)
+            new ScreenRegion("main", 0.02f, 0.02f, 0.96f, 0.68f, debugCol),
+            new ScreenRegion("menu", 0.02f, 0.72f, 0.23f, 0.26f, debugCol),
+            new ScreenRegion("amulet", 0.75f, 0.72f, 0.23f, 0.26f, debugCol),
+            new ScreenRegion("inv", 0.27f, 0.72f, 0.46f, 0.26f, debugCol)
         ));
     }
 

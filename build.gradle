@@ -26,7 +26,7 @@ application { mainClass = 'engine.Main' }
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 
-jlink {
+/*jlink {
     options = [
         '--strip-debug','--compress','2','--no-header-files','--no-man-pages',
         '--add-modules','java.desktop,jdk.unsupported'
@@ -43,4 +43,4 @@ jlink {
 
     // If you hit non‑modular lib issues, uncomment:
     // mergedModule { requires 'java.desktop'; requires 'jdk.unsupported' }
-}
+}*/
